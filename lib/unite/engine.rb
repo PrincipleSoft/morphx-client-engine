@@ -1,4 +1,6 @@
 require "mongoid"
+require "faraday"
+require 'oj'
 
 module Unite
   class Engine < ::Rails::Engine
