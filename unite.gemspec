@@ -26,10 +26,14 @@ Gem::Specification.new do |spec|
   spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
   spec.add_dependency "rails", "~> 6.0.1"
+  spec.add_dependency "mongoid", "~> 7.0.5"
+  spec.add_dependency "oj"
+  spec.add_dependency "faraday"
 
-  spec.add_development_dependency "sqlite3"
+  # spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "rspec-rails"
+  spec.add_development_dependency "mongoid-rspec"#, github: "yads/mongoid-rspec", branch: "master"
   spec.add_development_dependency "factory_bot_rails"
-
-
+  spec.add_development_dependency "database_cleaner-mongoid"
+  spec.add_development_dependency "faker"
 end
