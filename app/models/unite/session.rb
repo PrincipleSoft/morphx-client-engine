@@ -2,7 +2,7 @@ class Unite::Session < Unite::BaseModel
 
   include Unite::Concerns::Session::Bridge
 
-  belongs_to :user, class_name: 'Unite::User', foreign_key: 'user_id', optional: false
+  belongs_to :user, class_name: 'Unite::User', foreign_key: 'user_id', optional: false # TODO rename live_user
   belongs_to :channel, class_name: 'Unite::Channel', foreign_key: 'channel_id', optional: false
 
   field :unite_id, type: Integer # 1
@@ -31,4 +31,12 @@ class Unite::Session < Unite::BaseModel
   before_create :request_create
   # before_update :request_update
   # before_destroy :request_destroy
+
+  def displayable_embed
+    # TODO fix embed and remove gsubs
+    res = self.allow_chat ? self.embed['video_additions_live_chat'].gsub!('/additions', '/additions?chat=true') : self.embed['video_live']
+    res.gsub!('http://', 'https://')
+    res.gsub!('srcdoc=\'\'', '')
+    res
+  end
 end

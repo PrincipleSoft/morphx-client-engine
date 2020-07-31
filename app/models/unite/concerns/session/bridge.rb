@@ -18,8 +18,7 @@ module Unite::Concerns::Session::Bridge
     p api_response
     self.unite_id = api_response['response']['id']
     # temporary fix
-    self.embed = api_response['response']['embed'].each{|k, v| v.gsub!('http://', 'https://')}
-                                                  .each{|k, v| v.gsub!('srcdoc=\'\'', '')}
+    self.embed = api_response['response']['embed']
   end
 
   def request_update
@@ -32,21 +31,11 @@ module Unite::Concerns::Session::Bridge
 
   def session_params
     params = {}
-    p '+++++++++++'
-    p self.user.unite_id
-    p self.channel.unite_id
     params['user_id'] = self.user.unite_id
     params['channel_id'] = self.channel.unite_id
     params['session'] = self.attributes.slice("title", "description", "record", "allow_chat", "duration", "pre_time",
                                               "autostart", "device_type", "service_type", "start_at", "channel_id")
-    p '------======'*10
-    p self.start_now
-    p 30.seconds.from_now
-    p '------======'*10
-
     params['session']['start_at'] = 30.seconds.from_now if self.start_now
-    p self.start_now
-    p '------======'*10
     params
   end
 end
