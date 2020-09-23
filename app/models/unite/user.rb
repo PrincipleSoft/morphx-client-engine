@@ -14,6 +14,7 @@ class Unite::User < Unite::BaseModel
   field :password, type: String, default: "password" # password
   field :birthdate, type: Date, default: "01.01.1990" # 1992-11-06
   field :gender, type: String, default: "male" # male/female
+  field :organization_role, type: String, default: "presenter" # presenter/manager/administrator
 
   before_create :request_create
   before_update :request_update
