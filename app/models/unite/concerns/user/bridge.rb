@@ -29,7 +29,7 @@ module Unite::Concerns::User::Bridge
   end
 
   def user_params
-    self.attributes.slice("first_name", "last_name", "email", "password", "birthdate", "gender")
+    self.attributes.slice("first_name", "last_name", "email", "password", "birthdate", "gender").merge(organization_membership: {role: self.attributes['organization_role']})
   end
 end
 
